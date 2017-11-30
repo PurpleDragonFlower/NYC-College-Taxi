@@ -83,7 +83,7 @@ km.out4$cluster
 plot(dataframe3, col=(km.out3$cluster+1), main="K-Means Clustering with K=5", 
      xlab="", ylab="", pch=20, cex=2)
 
-plot(dataframe4, col=(km.out4$cluster+1), main="K-Means Clustering with K=5", 
+plot(dataframe4[, c(2,10)], col=(km.out4$cluster+1), main="K-Means Clustering with K=5", 
      xlab="", ylab="", pch=20, cex=2)
 
 summary(dataframe3)
