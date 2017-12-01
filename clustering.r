@@ -1,14 +1,15 @@
+install.packages(c("ggplot2", "devtools", "dplyr", "stringr"))
+library(ggplot2)
 library(caret)
 library(dplyr)
 library(tidyr)
 library(lubridate)
-library(ggplot2)
 install.packages("corrplot")
 library(corrplot)
+devtools::install_github("dkahle/ggmap")
 library(ggmap)
 
-
-dataframe <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
+dataframe <- read.csv('./Github/NYC-College-Taxi/filtered data/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
 dataframe2 <- dataframe %>%
   separate(tpep_dropoff_datetime, c("dropdate", "droptime"), " ")
 
@@ -25,7 +26,8 @@ dataframe3$droptime <- as.numeric(dataframe3$droptime)
 
 dataframe2 <- dataframe3
 dataframe3 <- dataframe3 %>%
-  mutate(totaltime = droptime - time )
+    mutate(totaltime = droptime - time )
+dataframe3 <- within(dataframe3, totaltime[totaltime<0] <- 86400 + totaltime)
 dataframe3 <- dataframe3[, -which(names(dataframe3) %in% c("time", "droptime"))]
 dataframe3 <- dataframe3[, -which(names(dataframe3) %in% c("store_and_fwd_flag"))]
 
