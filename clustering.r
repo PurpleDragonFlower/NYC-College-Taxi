@@ -75,7 +75,7 @@ corrplot(M4, method = "color", col = col(200),
 
 #kmeans clluestering
 km.out3=kmeans(dataframe3,5,nstart=20)
-km.out4=kmeans(dataframe4,5,nstart=20)
+km.out4=kmeans(dataframe4[, -11],2)
 km.out3
 km.out4
 km.out3$cluster
@@ -83,7 +83,7 @@ km.out4$cluster
 plot(dataframe3, col=(km.out3$cluster+1), main="K-Means Clustering with K=5", 
      xlab="", ylab="", pch=20, cex=2)
 
-plot(dataframe4[, c(2,10)], col=(km.out4$cluster+1), main="K-Means Clustering with K=5", 
+plot(dataframe4[, c(2,9)], col=(km.out4$cluster+1), main="K-Means Clustering with K=5", 
      xlab="", ylab="", pch=20, cex=2)
 
 summary(dataframe3)
@@ -106,7 +106,7 @@ abc
 
 
 dataframe4 <- dataframe4 %>%
-  mutate(location = )
+  mutate(location = z)
 
 
 z <- mapply(FUN = function(lon, lat) revgeocode(c(lon, lat)), dataframe4$pickup_longitude, dataframe4$pickup_latitude)
