@@ -1,4 +1,5 @@
 install.packages(c("ggplot2", "devtools", "dplyr", "stringr"))
+install.packages(c("maps", "mapdata"))
 library(ggplot2)
 library(caret)
 library(dplyr)
@@ -8,6 +9,10 @@ install.packages("corrplot")
 library(corrplot)
 devtools::install_github("dkahle/ggmap")
 library(ggmap)
+library(maps)
+library(mapdata)
+library(Hmisc)
+install.packages("Hmisc")
 
 dataframe <- read.csv('./Github/NYC-College-Taxi/filtered data/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
 dataframe2 <- dataframe %>%
@@ -108,13 +113,22 @@ abc
 
 
 dataframe4 <- dataframe4 %>%
-  mutate(location = z)
-
+	mutate(location = z)
 
 z <- mapply(FUN = function(lon, lat) revgeocode(c(lon, lat)), dataframe4$pickup_longitude, dataframe4$pickup_latitude)
 
-
 z
+
+# Plots dropoff locations on map with heatmap based on time of day
+seq <- seq(0, 86400, 3600)
+dataframe4$time <- hms(dataframe3$droptime)
+dataframe4$time <- as.numeric(dataframe4$time)
+
+dataframe4$dropoff_by_hour <- as.numeric(cut2(dataframe4$time, seq))
+
+nyc_base <- ggmap::get_map("New York City", zoom = 14)
+ggmap(nyc_base) + geom_point(data=dataframe4, aes(x=dropoff_longitude, y=dropoff_latitude, color=dropoff_by_hour))
+
 
 
 
