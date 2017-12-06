@@ -23,8 +23,8 @@ pickup_res <- hour(res)*60 + minute(res) + second(res)/60
 res2 <- hms(dataframe$dropoff_time)
 dropoff_res <- hour(res2)*60 + minute(res2) + second(res2)/60
 
-dataframe <- mutate(dataframe, pickup_res = hour(res)*60 + minute(res) + second(res)/60)
-dataframe <- mutate(dataframe, dropoff_res = hour(res2)*60 + minute(res2) + second(res2)/60)
+dataframe <- mutate(dataframe, pickup_res = hour(res)*60 + minute(res))
+dataframe <- mutate(dataframe, dropoff_res = hour(res2)*60 + minute(res2))
 dataframe <- dataframe %>%
   mutate(total_time = ifelse(pickup_res < dropoff_res, dropoff_res - pickup_res, pickup_res - dropoff_res))
 dataframe2 <- dataframe
@@ -50,7 +50,9 @@ dataframe3 <- dataframe3[!(dataframe3$total_amount <= 0),]
 dataframe3 <- dataframe3[!(dataframe3$total_time > 100),]
 plot(dataframe3$total_amount)
 sum(is.na(dataframe3))  
-dataframe3$amount_bins2 <- as.numeric(cut(dataframe3$total_amount, breaks = 30))
+#dataframe3$amount_bins2 <- as.numeric(cut(dataframe3$total_amount, breaks = 30))
+seq <- seq(0, 150, 5)
+dataframe3$amount_bins2 <- as.numeric(cut2(dataframe3$total_amount, seq))
 table(dataframe3$amount_bins2)
 write.csv(dataframe3, 
           file = "C:/Users/abhishek.suntwal/Downloads/final_data_extraction_for_sept_2015_with_bins.csv", 
