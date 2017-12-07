@@ -2,7 +2,8 @@ library("dplyr")
 library("tidyr")
 library(lubridate)
 library(Hmisc)
-
+library(caret)
+library(caretEnsemble)
 #Use this file to generate files which will be used to predict PaymentID
 #Reading the file in to dataframe and filtering the data based on Columbia University area Morning Heights
 dataframe <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2015-09.csv', header = TRUE)
@@ -70,4 +71,15 @@ write.csv(df_hrs,
 
 
 sum(is.na(dataframe2))
+#Creating Buckets for Total Amount
+plot(df_hrs)
+scatter.smooth(df_hrs$total_amount ,df_hrs$trip_distance)
+scatter.smooth(df_hrs$total_amount ,df_hrs$tip_amount)
+plot(df_hrs$total_amount)
+plot(df_hrs$trip_distance)
+plot(df_hrs$total_time)
+plot(df_hrs$tip_amount)
+plot(df_hrs$tolls_amount)
+table(df_hrs$passenger_count)
 
+sum(is.na(df_hrs))
