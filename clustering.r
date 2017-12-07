@@ -132,6 +132,7 @@ ggmap(nyc_base) + geom_point(data=dataframe4, aes(x=dropoff_longitude, y=dropoff
 dataframe5 <- dataframe4
 keep <- c('trip_distance','RatecodeID','totaltime')
 dataframe5 <- dataframe5[ , names(dataframe5) %in% keep]
-write.csv(dataframe5, "./Github/NYC-College-Taxi/test.csv")
+dataframe6 <- dataframe5[1:10000,]
+write.csv(dataframe6, "./Github/NYC-College-Taxi/test.csv")
 
 

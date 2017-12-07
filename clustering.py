@@ -19,7 +19,7 @@ if __name__ == "__main__":
 	#print(df)
 	nparr = df.as_matrix()
 	print(nparr)
-
+	print(nparr[0])
 	for linkage in ('ward', 'average', 'complete'):
 		clustering = AgglomerativeClustering(linkage=linkage, n_clusters=6)
 		t0 = time()
