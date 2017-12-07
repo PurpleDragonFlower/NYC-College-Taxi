@@ -121,14 +121,17 @@ z
 
 # Plots dropoff locations on map with heatmap based on time of day
 seq <- seq(0, 86400, 3600)
-dataframe4$time <- hms(dataframe3$droptime)
-dataframe4$time <- as.numeric(dataframe4$time)
-
+#dataframe4$time <- hms(dataframe2$droptime)
+#dataframe4$time <- as.numeric(dataframe4$time)
+dataframe4$time <- dataframe2$droptime
 dataframe4$dropoff_by_hour <- as.numeric(cut2(dataframe4$time, seq))
 
 nyc_base <- ggmap::get_map("New York City", zoom = 14)
 ggmap(nyc_base) + geom_point(data=dataframe4, aes(x=dropoff_longitude, y=dropoff_latitude, color=dropoff_by_hour))
 
-
+dataframe5 <- dataframe4
+keep <- c('trip_distance','RatecodeID','totaltime')
+dataframe5 <- dataframe5[ , names(dataframe5) %in% keep]
+write.csv(dataframe5, "./Github/NYC-College-Taxi/test.csv")
 
 
