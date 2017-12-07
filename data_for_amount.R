@@ -2,7 +2,7 @@ library("dplyr")
 library("tidyr")
 library(lubridate)
 library(Hmisc)
-
+library(corrplot)
 #Use this file to generate files which will be used to predict Total Amount Bucket
 #Removes "VendorID", "passenger_count", "fare_amount", "extra", "mta_tax", "tip_amount", "tolls_amount", "improvement_surcharge"
 #Since the total amount is directly dependent on these and we want to see if the corrxct proice range is predicted even these 
@@ -58,5 +58,35 @@ write.csv(dataframe3,
           eol = "\n", 
           append = TRUE,
           quote = FALSE) 
+x = dataframe[1:10000,c(7,10,21)]
 
 
+hc.complete=hclust(dist(x), method="complete")
+plot(hc.complete,main="Complete Linkage", xlab="", sub="", cex=.9)
+
+hc.complete=hclust(dist(x), method="average")
+plot(hc.complete,main="Average Linkage", xlab="", sub="", cex=.9)
+
+hc.complete=hclust(dist(x), method="single")
+plot(hc.complete,main="Single Linkage", xlab="", sub="", cex=.9)
+
+M3 <- cor(dataframe3)
+M4 <- cor(dataframe4)
+corrplot(M3, method = "color",  
+         type = "upper", order = "hclust", 
+         addCoef.col = "black", # Add coefficient of correlation
+         tl.col = "darkblue", tl.srt = 45, #Text label color and rotation
+         # Combine with significance level
+         sig.level = 0.01,  
+         # hide correlation coefficient on the principal diagonal
+         diag = FALSE 
+)
+corrplot(M4, method = "color",  
+         type = "upper", order = "hclust", 
+         addCoef.col = "black", # Add coefficient of correlation
+         tl.col = "darkblue", tl.srt = 45, #Text label color and rotation
+         # Combine with significance level
+         sig.level = 0.01,  
+         # hide correlation coefficient on the principal diagonal
+         diag = FALSE 
+)
