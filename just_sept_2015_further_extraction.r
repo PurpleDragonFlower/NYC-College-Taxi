@@ -18,38 +18,67 @@ dataframe <- dataframe %>%
 
 #Calculating total travel time in seconds
 res <- hms(dataframe$pickup_time)
-pickup_res <- hour(res)*60 + minute(res) + second(res)/60
+pickup_res <- hour(res)*60 + minute(res)
 res2 <- hms(dataframe$dropoff_time)
-dropoff_res <- hour(res2)*60 + minute(res2) + second(res2)/60
+dropoff_res <- hour(res2)*60 + minute(res2)
 
 dataframe <- mutate(dataframe, pickup_res = hour(res)*60 + minute(res))
 dataframe <- mutate(dataframe, dropoff_res = hour(res2)*60 + minute(res2))
 dataframe <- dataframe %>%
   mutate(total_time = ifelse(pickup_res < dropoff_res, dropoff_res - pickup_res, pickup_res - dropoff_res))
+
 dataframe2 <- dataframe
-dataframe2 <- dataframe2[, c(-1:-5, -10:-11, -15:-20, -22:-23)]
+dataframe2 <- dataframe2 %>%
+  mutate(store_and_fwd_flag = ifelse(store_and_fwd_flag == 'N', 0, 1))
+df_mins <- dataframe2
+df_mins <- df_mins[, c(-1:-2, -4:-5)]
+df_hrs <- df_mins
+dataframe2 <- dataframe2[, c(-1:-5)]
 write.csv(dataframe2, 
-          file = "C:/Users/abhishek.suntwal/Downloads/final_data_extraction_for_sept_2015.csv", 
+          file = "C:/Users/Abhishek/Documents/GitHub/NYC-College-Taxi/no_datetime.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
           col.names = FALSE, 
           eol = "\n", 
           append = TRUE,
-          quote = FALSE)                             
-sum(is.na(dataframe))
+          quote = FALSE)
+
+
+
+res <- hms(df_mins$pickup_time)
+df_mins <- mutate(df_mins, pickup_time = hour(res)*60 + minute(res))
+write.csv(df_mins, 
+          file = "C:/Users/Abhishek/Documents/GitHub/NYC-College-Taxi/pickup_in_mins.csv", 
+          sep = ",",
+          na = "NA", 
+          row.names = FALSE, 
+          col.names = FALSE, 
+          eol = "\n", 
+          append = TRUE,
+          quote = FALSE)
+
+df_hrs <- mutate(df_hrs, pickup_time = hour(res))
+write.csv(df_hrs, 
+          file = "C:/Users/Abhishek/Documents/GitHub/NYC-College-Taxi/pickup_in_hrs.csv", 
+          sep = ",",
+          na = "NA", 
+          row.names = FALSE, 
+          col.names = FALSE, 
+          eol = "\n", 
+          append = TRUE,
+          quote = FALSE)
+
+                             
+sum(is.na(dataframe2))
 
 dataframe3 <- dataframe2
 
 #Creating Buckets for Total Amount
 summary(dataframe3$total_amount)
 plot(dataframe3$total_amount)
-dataframe3 <- dataframe3[!(dataframe3$total_amount > 150),]# || 
-dataframe3 <- dataframe3[!(dataframe3$total_amount <= 0),]
-dataframe3 <- dataframe3[!(dataframe3$total_time > 100),]
 plot(dataframe3$total_amount)
 sum(is.na(dataframe3))  
-#dataframe3$amount_bins2 <- as.numeric(cut(dataframe3$total_amount, breaks = 30))
 seq <- seq(0, 150, 5)
 dataframe3$amount_bins2 <- as.numeric(cut2(dataframe3$total_amount, seq))
 table(dataframe3$amount_bins2)
