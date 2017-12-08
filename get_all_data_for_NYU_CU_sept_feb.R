@@ -1,6 +1,7 @@
 library("dplyr")
 library("tidyr")
-
+library(lubridate)
+library(Hmisc)
 #Reading data for 3 years
 df_2015_09 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2015-09.csv', header = TRUE)
 df_2014_09 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2014-09.csv', header = TRUE)
@@ -389,3 +390,104 @@ write.csv(dataset,
           quote = FALSE)
 
 
+#Now formatting the data, i.e.
+# Calculating total time travelled
+# Dropping the Total Amount Columns and Creating the Amount Bins
+# 
+dataframe <- read.csv('C:/Users/abhishek.suntwal/Downloads/all files/master_data.csv', header = TRUE)
+
+#Splitting the DateTime column to easily calculate Total tevelling time
+dataframe <- dataframe %>%
+  separate(tpep_pickup_datetime, c("pickup_date", "pickup_time"), " ")
+dataframe <- dataframe %>%
+  separate(tpep_dropoff_datetime, c("dropoff_date", "dropoff_time"), " ")
+
+#Calculating total travel time in minutes
+res <- hms(dataframe$pickup_time)
+res2 <- hms(dataframe$dropoff_time)
+dataframe <- mutate(dataframe, pickup_res = hour(res)*60 + minute(res))
+dataframe <- mutate(dataframe, dropoff_res = hour(res2)*60 + minute(res2))
+dataframe <- dataframe %>%
+  mutate(total_time = ifelse(pickup_res < dropoff_res, dropoff_res - pickup_res, pickup_res - dropoff_res))
+dataframe2 <- dataframe
+dataframe3 <- dataframe
+dataframe2 <- mutate(dataframe2, pickup_time = hour(res))
+dataframe3 <- mutate(dataframe3, pickup_time = hour(res)*60 + minute(res))
+
+# Dropping Additional  columns just created which are Dropoff_res and Pickup_res
+drops <- c("pickup_res", "dropoff_res", "pickup_date", "pickup_time", "dropoff_date", "dropoff_time")
+dataframe <- dataframe[, !names(dataframe) %in% drops]
+
+
+drops <- c("pickup_res", "dropoff_res", "pickup_date", "dropoff_date", "dropoff_time")
+dataframe2 <- dataframe2[, !names(dataframe2) %in% drops]
+dataframe3 <- dataframe3[, !names(dataframe3) %in% drops]
+
+
+# Creating Amount Buckets
+dataframe4 <- dataframe
+dataframe5 <- dataframe
+seq <- seq(0, 150, 10)
+dataframe4$total_amount <- as.numeric(cut2(dataframe4$total_amount, seq))
+dataframe5$total_amount <- as.numeric(cut2(dataframe5$total_amount, seq))
+drops <- c("fare_amount","extra", "mta_tax","tip_amount","tolls_amount")
+dataframe5 <- dataframe5[, !names(dataframe5) %in% drops]
+names(dataframe5)
+
+write.csv(dataframe,
+          file = "C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv",
+          sep = ",",
+          na = "NA",
+          row.names = FALSE,
+          col.names = TRUE,
+          append = FALSE,
+          quote = FALSE)
+write.csv(dataframe2,
+          file = "C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_hrs.csv",
+          sep = ",",
+          na = "NA",
+          row.names = FALSE,
+          col.names = TRUE,
+          append = FALSE,
+          quote = FALSE)
+write.csv(dataframe3,
+          file = "C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_mins.csv",
+          sep = ",",
+          na = "NA",
+          row.names = FALSE,
+          col.names = TRUE,
+          append = FALSE,
+          quote = FALSE)
+write.csv(dataframe4,
+          file = "C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_all_columns.csv",
+          sep = ",",
+          na = "NA",
+          row.names = FALSE,
+          col.names = TRUE,
+          append = FALSE,
+          quote = FALSE)
+write.csv(dataframe5,
+          file = "C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_few_columns.csv",
+          sep = ",",
+          na = "NA",
+          row.names = FALSE,
+          col.names = TRUE,
+          append = FALSE,
+          quote = FALSE)
+
+
+
+sum(is.na(dataframe))
+sum(is.na(dataframe2))
+sum(is.na(dataframe3))
+sum(is.na(dataframe4))
+sum(is.na(dataframe5))
+dummydf <- dataframe
+dummydf <- na.omit(dummydf)
+sum(is.na(dummydf))
+
+dataframe <- na.omit(dataframe)
+dataframe2 <- na.omit(dataframe2)
+dataframe3 <- na.omit(dataframe3)
+dataframe4 <- na.omit(dataframe4)
+dataframe5 <- na.omit(dataframe5)
