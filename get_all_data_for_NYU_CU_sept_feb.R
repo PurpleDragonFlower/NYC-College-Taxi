@@ -434,6 +434,21 @@ drops <- c("fare_amount","extra", "mta_tax","tip_amount","tolls_amount")
 dataframe5 <- dataframe5[, !names(dataframe5) %in% drops]
 names(dataframe5)
 
+sum(is.na(dataframe))
+sum(is.na(dataframe2))
+sum(is.na(dataframe3))
+sum(is.na(dataframe4))
+sum(is.na(dataframe5))
+dummydf <- dataframe
+dummydf <- na.omit(dummydf)
+sum(is.na(dummydf))
+
+dataframe <- na.omit(dataframe)
+dataframe2 <- na.omit(dataframe2)
+dataframe3 <- na.omit(dataframe3)
+dataframe4 <- na.omit(dataframe4)
+dataframe5 <- na.omit(dataframe5)
+
 write.csv(dataframe,
           file = "C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv",
           sep = ",",
@@ -477,17 +492,4 @@ write.csv(dataframe5,
 
 
 
-sum(is.na(dataframe))
-sum(is.na(dataframe2))
-sum(is.na(dataframe3))
-sum(is.na(dataframe4))
-sum(is.na(dataframe5))
-dummydf <- dataframe
-dummydf <- na.omit(dummydf)
-sum(is.na(dummydf))
 
-dataframe <- na.omit(dataframe)
-dataframe2 <- na.omit(dataframe2)
-dataframe3 <- na.omit(dataframe3)
-dataframe4 <- na.omit(dataframe4)
-dataframe5 <- na.omit(dataframe5)
