@@ -11,9 +11,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import Perceptron
 
-pred_amt_with_all_columns = pd.read_csv("pred_amt_with_all_columns.csv")
-pred_amt_with_few_columns = pd.read_csv("pred_amt_with_few_columns.csv")
+pred_amt_with_all_columns = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_all_columns.csv")
+pred_amt_with_few_columns = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_few_columns.csv")
 
 lr = LogisticRegression(random_state=1)
 rfc = RandomForestClassifier(random_state=1)
@@ -22,6 +23,7 @@ ada = AdaBoostClassifier(random_state=1)
 knn = KNeighborsClassifier()
 mlp = MLPClassifier()
 svc = LinearSVC()
+lp = Perceptron()
 
 file_list = [pred_amt_with_all_columns, pred_amt_with_few_columns]
 
@@ -64,10 +66,10 @@ for i in file_list:
     mlp_pred = mlp.predict(X_test)
     svc_pred = svc.predict(X_test)
 
-print "Logistic Regression: ",ms.accuracy_score(y_test, lr_pred)
-print "Random Forest Classifier: ",ms.accuracy_score(y_test, rfc_pred)
-print "Naive Bayes: ",ms.accuracy_score(y_test, gnb_pred)
-print "ADA Boost: ",ms.accuracy_score(y_test, ada_pred)
-print "K Nearest Neighbour: ",ms.accuracy_score(y_test, knn_pred)
-print "Multi-layer Perceptron classifier: ",ms.accuracy_score(y_test, mlp_pred)
-print "Linear SVM: ",ms.accuracy_score(y_test, svc_pred)
+    print "Logistic Regression: ",ms.accuracy_score(y_test, lr_pred)
+    print "Random Forest Classifier: ",ms.accuracy_score(y_test, rfc_pred)
+    print "Naive Bayes: ",ms.accuracy_score(y_test, gnb_pred)
+    print "ADA Boost: ",ms.accuracy_score(y_test, ada_pred)
+    print "K Nearest Neighbour: ",ms.accuracy_score(y_test, knn_pred)
+    print "Multi-layer Perceptron classifier: ",ms.accuracy_score(y_test, mlp_pred)
+    print "Linear SVM: ",ms.accuracy_score(y_test, svc_pred)

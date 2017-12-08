@@ -11,10 +11,11 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import Perceptron
 
-df_no_datetime = pd.read_csv("no_datetime.csv")
-df_min_pickup = pd.read_csv("pickup_in_mins.csv")
-df_hrs_pickup = pd.read_csv("pickup_in_hrs.csv")
+df_no_datetime = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv")
+df_min_pickup = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_mins.csv")
+df_hrs_pickup = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_hrs.csv")
 
 print df_no_datetime.shape, df_min_pickup.shape, df_hrs_pickup.shape
 
@@ -25,6 +26,7 @@ ada = AdaBoostClassifier(random_state=1)
 knn = KNeighborsClassifier()
 mlp = MLPClassifier()
 svc = LinearSVC()
+lp = Perceptron()
 
 file_list = [df_no_datetime, df_min_pickup, df_hrs_pickup]
 
@@ -58,6 +60,7 @@ for i in file_list:
     knn = knn.fit(X_train, y_train)
     mlp = mlp.fit(X_train, y_train)
     svc = svc.fit(X_train, y_train)
+    lp = lp.fit(X_train, y_train)
     lr_pred = lr.predict(X_test)
     rfc_pred = rfc.predict(X_test)
     gnb_pred = gnb.predict(X_test)
@@ -65,12 +68,14 @@ for i in file_list:
     knn_pred = knn.predict(X_test)
     mlp_pred = mlp.predict(X_test)
     svc_pred = svc.predict(X_test)
+    lp_pred = lp.predict(X_test)
 
-print "Logistic Regression: ",ms.accuracy_score(y_test, lr_pred)
-print "Random Forest Classifier: ",ms.accuracy_score(y_test, rfc_pred)
-print "Naive Bayes: ",ms.accuracy_score(y_test, gnb_pred)
-print "ADA Boost: ",ms.accuracy_score(y_test, ada_pred)
-print "K Nearest Neighbour: ",ms.accuracy_score(y_test, knn_pred)
-print "Multi-layer Perceptron classifier: ",ms.accuracy_score(y_test, mlp_pred)
-print "Linear SVM: ",ms.accuracy_score(y_test, svc_pred)
+    print "Logistic Regression: ",ms.accuracy_score(y_test, lr_pred)
+    print "Random Forest Classifier: ",ms.accuracy_score(y_test, rfc_pred)
+    print "Naive Bayes: ",ms.accuracy_score(y_test, gnb_pred)
+    print "ADA Boost: ",ms.accuracy_score(y_test, ada_pred)
+    print "K Nearest Neighbour: ",ms.accuracy_score(y_test, knn_pred)
+    print "Multi-layer Perceptron classifier: ",ms.accuracy_score(y_test, mlp_pred)
+    print "Linear SVM: ",ms.accuracy_score(y_test, svc_pred)
+    print "Perceptron: ", ms.accuracy_score(y_test, lp_pred)
 
