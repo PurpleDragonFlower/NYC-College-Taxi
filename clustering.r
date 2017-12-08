@@ -130,9 +130,48 @@ nyc_base <- ggmap::get_map("New York City", zoom = 14)
 ggmap(nyc_base) + geom_point(data=dataframe4, aes(x=dropoff_longitude, y=dropoff_latitude, color=dropoff_by_hour))
 
 dataframe5 <- dataframe4
-keep <- c('trip_distance','RatecodeID','totaltime')
-dataframe5 <- dataframe5[ , names(dataframe5) %in% keep]
-dataframe6 <- dataframe5[1:10000,]
-write.csv(dataframe6, "./Github/NYC-College-Taxi/test.csv")
+
+df_size <- nrow(dataframe4)
+
+subsets <- seq(0, df_size, df_size/24)
+
+length(subsets)
+
+df <- dataframe4
+#vec_len <- c()
+cluster_complete <- c()
+cluster_average <- c()
+cluster_single <- c()
+for (i in 1:(length(subsets)-1)){
+  #attach(mtcars)
+  par(mfrow=c(3,1))
+  df <- dataframe4[subsets[i]:subsets[(i+1)],]
+  #vec_len <- c(vec_len, nrow(df))
+  #write.csv(dataframe6, paste("./Github/NYC-College-Taxi/cluster/test", i, ".csv", sep=""))
+  
+  hc.complete=hclust(dist(df), method="complete")
+  plot(hc.complete,main="Complete Linkage", xlab="", sub="", cex=.9)
+  cluster_complete <- c(cluster_complete, hc.complete)
+  #
+  hc.average=hclust(dist(x), method="average")
+  plot(hc.average,main="Average Linkage", xlab="", sub="", cex=.9)
+  cluster_average <- c(cluster_average, hc.average)
+  #
+  hc.single=hclust(dist(x), method="single")
+  plot(hc.single,main="Single Linkage", xlab="", sub="", cex=.9)
+  cluster_single <- c(cluster_single, hc.single)
+  #print(i)
+  #invisible(readline(prompt="Press [enter] to continue"))
+}
+
+par(mfrow=c(3,1))
+plot(cluster_complete,main="Complete Linkage", xlab="", sub="", cex=.9)
+plot(cluster_average,main="Average Linkage", xlab="", sub="", cex=.9)
+plot(cluster_single,main="Single Linkage", xlab="", sub="", cex=.9)
+
+#keep <- c('trip_distance','RatecodeID','totaltime')
+#dataframe5 <- dataframe5[ , names(dataframe5) %in% keep]
+#dataframe6 <- dataframe5[1:10000,]
+#write.csv(dataframe6, "./Github/NYC-College-Taxi/test.csv")
 
 
