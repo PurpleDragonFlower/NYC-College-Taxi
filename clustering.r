@@ -22,7 +22,7 @@ library(mapdata)
 library(Hmisc)
 
 # Read in file
-dataframe <- read.csv('./Github/NYC-College-Taxi/filtered data/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
+dataframe <- read.csv('./Github/NYC-College-Taxi/nyu/df_2016_02_NYU.csv', header = TRUE)
 
 # Split up dropoff datetime to date and time
 dataframe2 <- dataframe %>%

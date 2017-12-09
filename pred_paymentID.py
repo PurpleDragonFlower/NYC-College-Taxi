@@ -13,9 +13,9 @@ from sklearn.svm import LinearSVC
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import Perceptron
 
-df_no_datetime = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv")
-df_min_pickup = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_mins.csv")
-df_hrs_pickup = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_hrs.csv")
+df_no_datetime = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/no_datetime.csv")
+df_min_pickup = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/pickup_in_mins.csv")
+df_hrs_pickup = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/pickup_in_hrs.csv")
 
 print df_no_datetime.shape, df_min_pickup.shape, df_hrs_pickup.shape
 

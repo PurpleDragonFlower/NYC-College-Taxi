@@ -13,8 +13,8 @@ from sklearn.svm import LinearSVC
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import Perceptron
 
-pred_amt_with_all_columns = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_all_columns.csv")
-pred_amt_with_few_columns = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_few_columns.csv")
+pred_amt_with_all_columns = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/pred_amt_with_all_columns.csv")
+pred_amt_with_few_columns = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/pred_amt_with_few_columns.csv")
 
 lr = LogisticRegression(random_state=1)
 rfc = RandomForestClassifier(random_state=1)

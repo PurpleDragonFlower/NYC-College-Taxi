@@ -1,15 +1,17 @@
+# Assumes working directory is the Documents folder and assumes there is a folder called Github/NYC-College-Taxi that contains all the files
+
 library("dplyr")
 library("tidyr")
 library(lubridate)
 library(Hmisc)
 #Reading data for 3 years
-df_2015_09 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2015-09.csv', header = TRUE)
-df_2014_09 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2014-09.csv', header = TRUE)
-df_2013_09 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2013-09.csv', header = TRUE)
-df_2016_02 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2016-02.csv', header = TRUE)
-df_2015_02 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2015-02.csv', header = TRUE)
-df_2014_02 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2014-02.csv', header = TRUE)
-df_2013_02 <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_2013-02.csv', header = TRUE)
+df_2015_09 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2015-09.csv', header = TRUE)
+df_2014_09 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2014-09.csv', header = TRUE)
+df_2013_09 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2013-09.csv', header = TRUE)
+df_2016_02 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2016-02.csv', header = TRUE)
+df_2015_02 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2015-02.csv', header = TRUE)
+df_2014_02 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2014-02.csv', header = TRUE)
+df_2013_02 <- read.csv('./Github/NYC-College-Taxi/yellow_taxi_data/yellow_tripdata_2013-02.csv', header = TRUE)
 
 names(df_2013_02)
 names(df_2013_09)
@@ -220,7 +222,7 @@ head(df_2015_09_CU)
 head(df_2016_02_CU)
 
 write.csv(df_2015_09_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2015_09_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2015_09_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -230,7 +232,7 @@ write.csv(df_2015_09_CU,
           quote = FALSE)
 
 write.csv(df_2014_09_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2014_09_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2014_09_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -240,7 +242,7 @@ write.csv(df_2014_09_CU,
           quote = FALSE)
 
 write.csv(df_2013_09_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2013_09_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2013_09_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -250,7 +252,7 @@ write.csv(df_2013_09_CU,
           quote = FALSE)
 
 write.csv(df_2016_02_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2016_02_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2016_02_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -260,7 +262,7 @@ write.csv(df_2016_02_CU,
           quote = FALSE)
 
 write.csv(df_2015_02_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2015_02_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2015_02_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -270,7 +272,7 @@ write.csv(df_2015_02_CU,
           quote = FALSE)
 
 write.csv(df_2014_02_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2014_02_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2014_02_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -280,7 +282,7 @@ write.csv(df_2014_02_CU,
           quote = FALSE)
 
 write.csv(df_2013_02_CU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2013_02_CU.csv", 
+          file = "./Github/NYC-College-Taxi/columbia/df_2013_02_CU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -290,7 +292,7 @@ write.csv(df_2013_02_CU,
           quote = FALSE)
 
 write.csv(df_2015_09_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2015_09_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2015_09_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -300,7 +302,7 @@ write.csv(df_2015_09_NYU,
           quote = FALSE)			
 
 write.csv(df_2014_09_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2014_09_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2014_09_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -310,7 +312,7 @@ write.csv(df_2014_09_NYU,
           quote = FALSE)
 
 write.csv(df_2013_09_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2013_09_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2013_09_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -320,7 +322,7 @@ write.csv(df_2013_09_NYU,
           quote = FALSE)
 
 write.csv(df_2016_02_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2016_02_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2016_02_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -330,7 +332,7 @@ write.csv(df_2016_02_NYU,
           quote = FALSE)
 
 write.csv(df_2015_02_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2015_02_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2015_02_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -340,7 +342,7 @@ write.csv(df_2015_02_NYU,
           quote = FALSE)
 
 write.csv(df_2014_02_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2014_02_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2014_02_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -351,7 +353,7 @@ write.csv(df_2014_02_NYU,
 
 
 write.csv(df_2013_02_NYU, 
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/df_2013_02_NYU.csv", 
+          file = "./Github/NYC-College-Taxi/nyu/df_2013_02_NYU.csv", 
           sep = ",",
           na = "NA", 
           row.names = FALSE, 
@@ -359,8 +361,6 @@ write.csv(df_2013_02_NYU,
           eol = "\n", 
           append = FALSE,
           quote = FALSE)
-
-setwd("C://Users//abhishek.suntwal//Downloads//all files")
 
 file_list <- list.files()
 file_list
@@ -381,7 +381,7 @@ for (file in file_list){
 }
 
 write.csv(dataset,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/master_data.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/master_data.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,
@@ -394,7 +394,7 @@ write.csv(dataset,
 # Calculating total time travelled
 # Dropping the Total Amount Columns and Creating the Amount Bins
 # 
-dataframe <- read.csv('C:/Users/abhishek.suntwal/Downloads/all files/master_data.csv', header = TRUE)
+dataframe <- read.csv('./Github/NYC-College-Taxi/extracted_data/master_data.csv', header = TRUE)
 
 #Splitting the DateTime column to easily calculate Total tevelling time
 dataframe <- dataframe %>%
@@ -450,7 +450,7 @@ dataframe4 <- na.omit(dataframe4)
 dataframe5 <- na.omit(dataframe5)
 
 write.csv(dataframe,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/no_datetime.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,
@@ -458,7 +458,7 @@ write.csv(dataframe,
           append = FALSE,
           quote = FALSE)
 write.csv(dataframe2,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_hrs.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/pickup_in_hrs.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,
@@ -466,7 +466,7 @@ write.csv(dataframe2,
           append = FALSE,
           quote = FALSE)
 write.csv(dataframe3,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/pickup_in_mins.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/pickup_in_mins.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,
@@ -474,7 +474,7 @@ write.csv(dataframe3,
           append = FALSE,
           quote = FALSE)
 write.csv(dataframe4,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_all_columns.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/pred_amt_with_all_columns.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,
@@ -482,7 +482,7 @@ write.csv(dataframe4,
           append = FALSE,
           quote = FALSE)
 write.csv(dataframe5,
-          file = "C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_few_columns.csv",
+          file = "./Github/NYC-College-Taxi/extracted_data/pred_amt_with_few_columns.csv",
           sep = ",",
           na = "NA",
           row.names = FALSE,

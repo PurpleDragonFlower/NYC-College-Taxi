@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
 
 
-pred_amt_with_all_columns = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/pred_amt_with_all_columns.csv")
+pred_amt_with_all_columns = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/pred_amt_with_all_columns.csv")
 
 print pred_amt_with_all_columns.shape
 

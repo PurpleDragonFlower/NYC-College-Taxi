@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
 
 
-df_no_datetime = pd.read_csv("C:/Users/abhishek.suntwal/Downloads/all files/no_datetime.csv")
+df_no_datetime = pd.read_csv("./Github/NYC-College-Taxi/extracted_data/no_datetime.csv")
 
 print df_no_datetime.shape
 

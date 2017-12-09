@@ -1,7 +1,17 @@
 NYC Taxi Data Analysis
 ======================
 
-New York City Yellow Taxi Data analytics to predict the payment type and total amount a single taxi trip costs with pickup from Columbia University.
+New York City Yellow Taxi Data analytics to predict the payment type and total amount a single taxi trip costs with pickup from Columbia University and New York University.
+
+Includes exploration in Machine Learning with 
+
+- Ensembles learning with Voted Classifier 
+
+- Unsupervised Learning with Hierarchical Clusters
+
+- Feature Extraction with Pipelining through PCA
+
+- Tuning Parameters with Exhaustive Grid-based Search
 
 Prequisites
 -----------
