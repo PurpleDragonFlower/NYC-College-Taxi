@@ -5,6 +5,7 @@ install.packages(c("ggplot2", "devtools", "dplyr", "stringr"))
 install.packages(c("maps", "mapdata"))
 install.packages("Hmisc")
 install.packages("corrplot")
+install.packages("jpeg")
 
 devtools::install_github("dkahle/ggmap")
 
@@ -20,6 +21,7 @@ library(ggmap)
 library(maps)
 library(mapdata)
 library(Hmisc)
+library(jpeg)
 
 # Read in file
 dataframe <- read.csv('./Github/NYC-College-Taxi/nyu/df_2016_02_NYU.csv', header = TRUE)
@@ -69,15 +71,24 @@ for (i in 1:(length(subsets)-1)){
   par(mfrow=c(3,1))
   df <- dataframe4[subsets[i]:subsets[(i+1)],]
   
+  mypath <- file.path(paste('./Github/NYC-College-Taxi/cluster/clusters_complete_',i,'.jpg',sep=""))
+  jpeg(file=mypath)
   hc.complete=hclust(dist(df), method="complete")
   plot(hc.complete,main="Complete Linkage", xlab="", sub="", cex=.9)
+  dev.off()
   
+  mypath <- file.path(paste('./Github/NYC-College-Taxi/cluster/clusters_average_',i,'.jpg',sep=""))
+  jpeg(file=mypath)
   hc.average=hclust(dist(x), method="average")
   plot(hc.average,main="Average Linkage", xlab="", sub="", cex=.9)
+  dev.off()
   
+  mypath <- file.path(paste('./Github/NYC-College-Taxi/cluster/clusters_single_',i,'.jpg',sep=""))
+  jpeg(file=mypath)
   hc.single=hclust(dist(x), method="single")
   plot(hc.single,main="Single Linkage", xlab="", sub="", cex=.9)
+  dev.off()
   
-  print(i)
-  invisible(readline(prompt="Press [enter] to continue"))
+  #print(i)
+  #invisible(readline(prompt="Press [enter] to continue"))
 }
