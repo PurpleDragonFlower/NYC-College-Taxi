@@ -1,14 +1,20 @@
+install.packages(c("ggplot2", "devtools", "dplyr", "stringr"))
+install.packages(c("maps", "mapdata"))
+library(ggplot2)
 library(caret)
 library(dplyr)
 library(tidyr)
 library(lubridate)
-library(ggplot2)
 install.packages("corrplot")
 library(corrplot)
+devtools::install_github("dkahle/ggmap")
 library(ggmap)
+library(maps)
+library(mapdata)
+library(Hmisc)
+install.packages("Hmisc")
 
-
-dataframe <- read.csv('C:/Users/abhishek.suntwal/Downloads/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
+dataframe <- read.csv('./Github/NYC-College-Taxi/filtered data/yellow_tripdata_feb_with_longlat.csv', header = TRUE)
 dataframe2 <- dataframe %>%
   separate(tpep_dropoff_datetime, c("dropdate", "droptime"), " ")
 
@@ -25,7 +31,8 @@ dataframe3$droptime <- as.numeric(dataframe3$droptime)
 
 dataframe2 <- dataframe3
 dataframe3 <- dataframe3 %>%
-  mutate(totaltime = droptime - time )
+    mutate(totaltime = droptime - time )
+dataframe3 <- within(dataframe3, totaltime[totaltime<0] <- 86400 + totaltime)
 dataframe3 <- dataframe3[, -which(names(dataframe3) %in% c("time", "droptime"))]
 dataframe3 <- dataframe3[, -which(names(dataframe3) %in% c("store_and_fwd_flag"))]
 
@@ -106,13 +113,22 @@ abc
 
 
 dataframe4 <- dataframe4 %>%
-  mutate(location = z)
-
+	mutate(location = z)
 
 z <- mapply(FUN = function(lon, lat) revgeocode(c(lon, lat)), dataframe4$pickup_longitude, dataframe4$pickup_latitude)
 
-
 z
+
+# Plots dropoff locations on map with heatmap based on time of day
+seq <- seq(0, 86400, 3600)
+dataframe4$time <- hms(dataframe3$droptime)
+dataframe4$time <- as.numeric(dataframe4$time)
+
+dataframe4$dropoff_by_hour <- as.numeric(cut2(dataframe4$time, seq))
+
+nyc_base <- ggmap::get_map("New York City", zoom = 14)
+ggmap(nyc_base) + geom_point(data=dataframe4, aes(x=dropoff_longitude, y=dropoff_latitude, color=dropoff_by_hour))
+
 
 
 
